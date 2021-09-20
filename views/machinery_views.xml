@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- ********************** FORMS ****************************** -->
+
+    <!-- construction.machinery form view -->
+    <record id="machinery_view_form" model="ir.ui.view">
+        <field name="name">construction.machinery.view.form</field>
+        <field name="model">construction.machinery</field>
+        <field name="arch" type="xml">
+            <form string="Maquinaria">
+                <header>
+                    <field name="name" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group string='General'>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="unit"/>
+                            <field name="capacity"/>
+                            <field name="serie"/>
+                            <field name="fuel_type"/>
+                            <field name="anual_interest_rate"/>
+                            <field name="average_annual_insurance_premium"/>
+                            <field name="direct_cost_machinery"/>
+                        </group>
+                        <group>
+                            <field name="photo" widget="image"/>
+                        </group>
+                    </group>
+                    <hr/>
+                    <group colspan='6' col='3'>
+                        <group string='Cargos fijos'>
+                            <field name="depreciation"/>
+                            <field name="investment"/>
+                            <field name="insurance"/>
+                            <field name="maintenance"/>
+                            <hr/>
+                            <field name="sum_fixed_cost"/>
+                        </group>
+                        <group string='Consumos'>
+                            <field name="fuel"/>
+                            <field name="lubrincant"/>
+                            <field name="wheels"/>
+                            <field name="special_pieces"/>
+                            <hr/>
+                            <field name="sum_consumptions"/>
+                        </group>
+                        <group string='Operación'>
+                            <field name="worker_price"/>
+                            <field name="worker_unit"/>
+                            <hr/>
+                            <field name="worker_import"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Cargos fijos" name="">
+                            <group>
+                                <group string='Máquina'>
+                                    <field name="acquisition_price"/>
+                                    <field name="additional_equipment"/>
+                                    <field name="machine_value"/>
+                                    <field name="salvage_value"/>
+                                </group>
+                                <group string='Vida económica'>
+                                    <field name="economic_life_years"/>
+                                    <field name="economic_life"/>
+                                    <field name="hours_per_year"/>
+                                </group>
+                                <group string='Llantas'>
+                                    <field name="wheels_price"/>
+                                    <field name="wheels_economic_life"/>
+                                </group>
+                                <group string='Piezas especiales'>
+                                    <field name="price_special_pieces"/>
+                                    <field name="pieces_economic_life"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Consumos" name="">
+                            <group>
+                                <group string='Combustible'>
+                                    <field name="fuel_cost"/>
+                                    <field name="fuel_coefficient"/>
+                                </group>
+                                <group string='Lubricante'>
+                                    <field name="lubricant_cost"/>
+                                    <field name="lubricant_coefficient"/>
+                                    <field name="lubricant_time"/>
+                                </group>
+                                <group>
+                                    <field name="rated_power"/>
+                                    <field name="operating_factor"/>
+                                    <field name="operating_power"/>
+                                    <field name="mantenance_factor"/>
+                                    <field name="carter_capacity"/>
+                                    <field name="performance_factor"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Operación" name="">
+                            <group>
+                                <field name="operation_sum"/>
+                                <field name="worker_id"/>
+                                <field name="worker_price"/>
+                                <field name="operator_real_salary"/>
+                                <field name="cost_by_operation_salary"/>
+                                <field name="effective_working_hours_shift"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ***************************** SEARCH ************************* -->
+
+    <!-- construction.machinery search view -->
+    <record id="machinery_view_search" model="ir.ui.view">
+        <field name="name">construction.machinery.view.search</field>
+        <field name="model">construction.machinery</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ********************** TREE VIEWS ************************* -->
+
+    <!-- construction.machinery tree view -->
+    <record id="machinery_name_view_tree" model="ir.ui.view">
+        <field name="name">construction.machinery.view.tree</field>
+        <field name="model">construction.machinery</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="unit"/>
+                <field name="capacity"/>
+                <field name="serie"/>
+                <field name="fuel_type"/>
+                <field name="worker_price"/>
+                <field name="direct_cost_machinery"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ********************** ACTIONS ****************************** -->
+
+    <!-- Window action -->
+    <record model="ir.actions.act_window" id="machinary_list_action">
+        <field name="name">Maquinaria</field>
+        <field name="res_model">construction.machinery</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Agregar maquinaria</p>
+        </field>
+    </record>
+
+    <!-- ************************* MENUS ***************************** -->
+
+    <!-- menu machinery -->
+    <menuitem id="main_machinary_menu" name="Maquinaria" parent="main_construction_menu"/>
+    <!-- items menu machinery -->
+    <menuitem id="machinary_menu" name="Maquinaria" parent="main_machinary_menu" action="machinary_list_action"/>
+
+</odoo>

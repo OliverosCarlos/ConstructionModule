@@ -1,0 +1,57 @@
+.container-tree{
+    border-radius: 3px;
+    border: solid 1px black;
+}
+
+.cntr-folder{
+    padding: 5px;
+    border-bottom: solid 1px lightgrey;
+}
+
+.cntr-folder:hover{
+    padding: 5px;
+    background-color: gainsboro;
+    cursor: pointer;
+}
+
+.folder-icon{
+    margin-right: 10px;
+}
+
+.folder-title{
+
+}
+
+.nested{
+    border-left: solid 1px gainsboro;
+}
+
+.container-tool{
+    border-radius: 3px;
+}
+
+.model-item{
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.model-item:hover{
+    background-color: gainsboro;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.title-tool{
+    background-color: lightgrey;
+    padding: 10px;
+}
+
+.body-tool{
+}
+
+.thumbnail-model{
+    width: 100px;
+    height: 100px;
+}

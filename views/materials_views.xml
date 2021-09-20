@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ********************** FORMS ****************************** -->
+    <!-- construction.material form view -->
+    <record id="material_view_form" model="ir.ui.view">
+        <field name="name">construction.material.view.form</field>
+        <field name="model">construction.material</field>
+        <field name="arch" type="xml">
+            <form string="Material">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="m_unit"/>
+                            <field name="performance"/>
+                            <field name="cost"/>
+                            <field name="coin"/>
+                            <field name="web_site"/>
+                            <field name="supplier"/>
+                            <field name="currency_id" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="image" widget="image"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ***************************** SEARCH ************************* -->
+    <record model="ir.ui.view" id="material_search_view">
+        <field name="name">material.search</field>
+        <field name="model">construction.material</field>
+        <field name="arch" type="xml">
+            <search string='Buscar material'>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ********************** TREE VIEWS ************************* -->
+    <!-- construction.material tree view -->
+    <record id="material_view_tree" model="ir.ui.view">
+        <field name="name">construction.material.view.tree</field>
+        <field name="model">construction.material</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="m_unit"/>
+                <field name="coin"/>
+                <field name="web_site" widget="url"/>
+                <field name="supplier"/>
+                <field name="performance"/>
+                <field name="currency_id" invisible="1" />
+                <field name="cost" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ********************** KANBAN VIEWS ************************* -->
+    <!-- construction.material kanban view -->
+    <record id="material_kanban_view" model="ir.ui.view">
+        <field name="name">construction.material.kanban</field>
+        <field name="model">construction.material</field>
+        <field name="arch" type="xml">
+            <kanban class="o_res_partner_kanban" sample="1">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <field name="image" widget="image"/>
+                            <div class="oe_kanban_details d-flex flex-column">
+                                <strong class="o_kanban_record_title oe_partner_heading">
+                                    <field name="code"/>
+                                </strong>
+                                <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                <ul>
+                                    <li>
+                                        <field name="name"/>
+                                    </li>
+                                    <li>
+                                        <field name="description"/>
+                                    </li>
+                                    <li>
+                                        <field name="web_site" widget="url"/>
+                                    </li>
+                                    <li>
+                                        <field name="m_unit"/>
+                                    </li>
+                                    <li>
+                                        <field name="currency_id" invisible="1" />
+                                        <field name="cost" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- ********************** ACTIONS ****************************** -->
+
+    <!-- construction.material action window -->
+    <record id="material_list_action" model="ir.actions.act_window">
+        <field name="name">Material</field>
+        <field name="res_model">construction.material</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear material.
+            </p>
+        </field>
+    </record>
+
+    <!-- ************************* MENUS ***************************** -->
+
+    <!-- items menu materiales -->
+    <menuitem id="item_menu_materials" name="Materiales" parent="main_catalogs_menu" action="material_list_action"/>
+</odoo>

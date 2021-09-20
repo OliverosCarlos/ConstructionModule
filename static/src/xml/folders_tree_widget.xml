@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template id="folders_tree_view_widget_template" xml:space="preserve">
+  <t t-name='construction.tree_folders_view_widget'>
+    <div class="col-12 container-tree">
+      <div class="row">
+        <div class="col-3">
+          <div class="row m-0 p-0 ">
+            <button type="button" class="btn btn-primary btn-block showViewer">Show model</button>
+          </div>
+          <div class="row m-0 p-0 container-tool">
+            <div class="col-12">
+              <div class="row title-tool">
+                <span>Proyecto</span>
+              </div>
+              <div class="row body-tool">
+                <div class="col-12">
+                  <ul id="myUL" t-foreach="widget.menu" t-as="item">
+                    <li>
+                      <div class="row container-item-tree">
+                        <div class="col-2 item-tree">
+                          <div class="caret"></div>
+                        </div>
+                        <div t-att-item-id='item.id' class="col-10 item-tree stage-up">
+                          <span class="fa fa-folder"></span>
+                          <span >
+                            <t t-esc="item.name"></t>
+                          </span>
+                        </div>
+                      </div>
+                      <ul class="nested">
+                        <t t-foreach="item.childs" t-as="element">
+                          <li>
+                            <div class="row item-tree">
+                              <div class="col-2">
+                                <div class="caret"></div>
+                              </div>
+                              <div class="col-10">
+                                <span class="fa fa-folder"></span>
+                                <span t-att-element-id='element.id' class="element-up">
+                                  <t t-esc="element.name"></t>
+                                </span>
+                              </div>
+                            </div>
+                            <ul class="nested">
+                              <t t-foreach="element.files" t-as="files">
+                                <li>
+                                  <div class="row item-tree">
+                                    <div class="col-10">
+                                      <span class="fa fa-cubes"></span>
+                                      <span t-att-urn-id='files.urn' class="renderFile">
+                                        <t t-esc="files.name"></t>
+                                      </span>
+                                    </div>
+                                  </div>
+                                </li>
+                              </t>
+                            </ul>
+                          </li>
+                        </t>
+                        <t t-foreach="item.files" t-as="element">
+                          <li>
+                            <div class="row item-tree">
+                              <div class="col-10">
+                                <span class="fa fa-cubes"></span>
+                                <span t-att-urn-id='element.urn' class="renderFile">
+                                  <t t-esc="element.name"></t>
+                                </span>
+                              </div>
+                            </div>
+                          </li>
+                        </t>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row m-0 p-0 container-tool">
+            <div class="col-12">
+              <div class="row title-tool">
+                <span>Modelo</span>
+              </div>
+              <div class="row body-tool">
+                <div class="col-12">
+                  <ul id="myUL" t-foreach="widget.model_menu" t-as="object">
+                    <li>
+                      <div class="row container-item-tree">
+                        <div class="col-2 item-tree">
+                          <div class="caret"></div>
+                        </div>
+                        <div t-att-object-id='object.objectid' class="col-10 item-tree stage-up">
+                          <span class="fa fa-folder"></span>
+                          <span >
+                            <t t-esc="object.name"></t>
+                          </span>
+                        </div>
+                      </div>
+                      <!-- <ul class="nested">
+                        <t t-foreach="item.childs" t-as="element">
+                          <li>
+                            <div class="row item-tree">
+                              <div class="col-2">
+                                <div class="caret"></div>
+                              </div>
+                              <div class="col-10">
+                                <span class="fa fa-folder"></span>
+                                <span t-att-element-id='element.id' class="element-up">
+                                  <t t-esc="element.name"></t>
+                                </span>
+                              </div>
+                            </div>
+                            <ul class="nested">
+                              <t t-foreach="element.files" t-as="files">
+                                <li>
+                                  <div class="row item-tree">
+                                    <div class="col-10">
+                                      <span class="fa fa-cubes"></span>
+                                      <span t-att-urn-id='files.urn' class="renderFile">
+                                        <t t-esc="files.name"></t>
+                                      </span>
+                                    </div>
+                                  </div>
+                                </li>
+                              </t>
+                            </ul>
+                          </li>
+                        </t>
+                        <t t-foreach="item.files" t-as="element">
+                          <li>
+                            <div class="row item-tree">
+                              <div class="col-10">
+                                <span class="fa fa-cubes"></span>
+                                <span t-att-urn-id='element.urn' class="renderFile">
+                                  <t t-esc="element.name"></t>
+                                </span>
+                              </div>
+                            </div>
+                          </li>
+                        </t>
+                      </ul> -->
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row m-0 p-0 container-tool">
+            <div class="col-12">
+              <div class="row title-tool">
+                <span>Propiedades</span>
+              </div>
+              <div class="row body-tool">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="row">
+            <div class="col-12">
+              <div id="forgeViewer" class="container-viewer"></div>
+              <button id="MyAwesomeLockButton">Lock it!</button>
+              <button id="MyAwesomeUnlockButton">Unlock it!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </t>
+</template>

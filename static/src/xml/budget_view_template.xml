@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template id="budget_view_template" xml:space="preserve">
+  <t t-name='construction.budget_view_widget'>
+    <div class="col-12">
+      <div class="o_list_view">
+        <div class="table-responsive">
+          <table class="o_list_table table table-sm table-hover table-striped o_list_table_ungrouped">
+            <thead>
+              <tr>
+                <th class="o_column_sortable o_list_number_th">#</th>
+                <th class="o_column_sortable">Partida</th>
+                <th class="o_column_sortable o_list_number_th">#</th>
+                <th class="o_column_sortable">Concepto</th>
+                <th class="o_column_sortable">Unidad</th>
+                <th class="o_column_sortable o_list_number_th">Cantidad</th>
+                <th class="o_column_sortable o_list_number_th">Precio unitario</th>
+                <th class="o_column_sortable o_list_number_th">Importe</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-foreach="widget.stages" t-as="stage">
+                <tr>
+                  <td colspan="1" t-att-rowspan="stage['len_items']" class="o_data_cell o_field_cell o_list_number stage_cell">
+                    <t t-esc="stage_index+1"></t>
+                  </td >
+                  <td colspan="1" t-att-rowspan="stage['len_items']" class="stage_cell">
+                    <t t-esc="stage['name']"></t>
+                  </td>
+                </tr>
+                <!-- MATERIALS -->
+                <t t-set="index" t-value="0"/>
+                <t t-foreach="stage['materials']" t-as="material">
+                  <t t-set="index" t-value="index+1"/>
+                  <tr>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      <t t-esc="stage_index+1"></t>.<t t-esc="index"></t>
+                    </td>
+                    <td>
+                      <t t-esc="material[1]"></t>
+                    </td>
+                    <td>
+                      <t t-esc="material[2]"></t>
+                    </td>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      <t t-esc="material[4]"></t>
+                    </td>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      $ <t t-esc="material[3]"></t>
+                    </td>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      $ <t t-esc="material[5]"></t>
+                    </td>
+                  </tr>
+                </t>
+                <!--  WORKFORCE-->
+                <t t-foreach="stage['workforces']" t-as="workforce">
+                  <t t-set="index" t-value="index+1"/>
+                  <tr>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      <t t-esc="stage_index+1"></t>.<t t-esc="index"></t>
+                    </td>
+                    <td>
+                      <t t-esc="workforce[1]"></t>
+                    </td>
+                    <td>
+                      <t t-esc="workforce[2]"></t>
+                    </td>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      <t t-esc="workforce[4]"></t>
+                    </td>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      $ <t t-esc="workforce[3]"></t>
+                    </td>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      $ <t t-esc="workforce[5]"></t>
+                    </td>
+                  </tr>
+                </t>
+                <!-- MACHINERY -->
+                <t t-foreach="stage['machineries']" t-as="machinery">
+                  <t t-set="index" t-value="index+1"/>
+                  <tr>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      <t t-esc="stage_index+1"></t>.<t t-esc="index"></t>
+                    </td>
+                    <td>
+                      <t t-esc="machinery[1]"></t>
+                    </td>
+                    <td>
+                      <t t-esc="machinery[2]"></t>
+                    </td>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      <t t-esc="machinery[4]"></t>
+                    </td>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      $ <t t-esc="machinery[3]"></t>
+                    </td>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      $ <t t-esc="machinery[5]"></t>
+                    </td>
+                  </tr>
+                </t>
+                <!-- CONCEPTS -->
+                <t t-foreach="stage['concepts']" t-as="concept">
+                  <t t-set="index" t-value="index+1"/>
+                  <tr>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      <t t-esc="stage_index+1"></t>.<t t-esc="index"></t>
+                    </td>
+                    <td>
+                      <t t-esc="concept[1]"></t>
+                    </td>
+                    <td>
+                      <t t-esc="concept[2]"></t>
+                    </td>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      <t t-esc="concept[4]"></t>
+                    </td>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      $ <t t-esc="concept[3]"></t>
+                    </td>
+                    <td class="o_data_cell o_field_cell o_list_number">
+                      $ <t t-esc="concept[5]"></t>
+                    </td>
+                  </tr>
+                </t>
+                <tr class="stage_section">
+                  <td class="o_data_cell o_field_cell o_list_number" colspan="7">
+                    <span class="stage_section_text">Total <t t-esc="stage['name']"></t> :</span>
+                  </td>
+                  <td class="o_data_cell o_field_cell o_list_number" colspan="1">
+                    <span class="stage_section_text">$ <t t-esc="stage['cost']"></t></span>
+                  </td>
+                </tr>
+              </t>
+              <tr>
+                  <td class="o_data_cell o_field_cell" colspan="6">
+                  </td>
+                  <td class="o_data_cell o_field_cell o_list_number" colspan="1">
+                    <span class="stage_section_text">Subtotal</span>
+                  </td>
+                  <td class="o_data_cell o_field_cell o_list_number" colspan="1">
+                    <span class="stage_section_text">$ <t t-esc="widget.subtotal"></t></span>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="o_data_cell o_field_cell" colspan="6">
+                  </td>
+                  <td class="o_data_cell o_field_cell o_list_number" colspan="1">
+                    <span class="stage_section_text">IVA</span>
+                  </td>
+                  <td class="o_data_cell o_field_cell o_list_number" colspan="1">
+                    <span class="stage_section_text"><t t-esc="widget.iva"></t>%</span>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="o_data_cell o_field_cell" colspan="6">
+                  </td>
+                  <td class="o_data_cell o_field_cell o_list_number" colspan="1">
+                    <span class="stage_section_text">IMPORTE IVA</span>
+                  </td>
+                  <td class="o_data_cell o_field_cell o_list_number" colspan="1">
+                    <span class="stage_section_text">$ <t t-esc="widget.importe_iva"></t></span>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="o_data_cell o_field_cell" colspan="6">
+                  </td>
+                  <td class="o_data_cell o_field_cell o_list_number" colspan="1">
+                    <span class="stage_section_text">Total</span>
+                  </td>
+                  <td class="o_data_cell o_field_cell o_list_number" colspan="1">
+                    <span class="stage_section_text">$ <t t-esc="widget.total"></t></span>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </t>
+</template>

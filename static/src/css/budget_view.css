@@ -1,0 +1,13 @@
+.stage_cell{
+    border: solid 1px gainsboro;
+}
+
+.stage_section{
+    background-color: rgba(169, 169, 169, 0.534);
+}
+
+.stage_section_text{
+    font-weight: bold;
+}
+
+

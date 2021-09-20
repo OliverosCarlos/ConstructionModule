@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template id="construction_tree_view_widget_template" xml:space="preserve">
+  <t t-name='construction.tree_concepts_view_widget'>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-3 container-tree">
+          <div class="row m-0 p-0">
+            <div class="col-12">
+            <a href="https://developer.api.autodesk.com/authentication/v1/authorize?response_type=code&amp;client_id=O1dIaiH9hP7ye8M2mnqUpO6C8jgLqKmF&amp;redirect_uri=http%3A%2F%2Flocalhost:8069%2fsite&amp;scope=data:read%20data:write%20data:create%20account:write%20account:read"> Click here to grant access to your data!</a>
+              <button type="button" class="btn btn-primary btn-block showViewer">Show model</button>
+              <button type="button" class="btn btn-primary btn-block getHubs">Get hubs</button>
+              <input type="file" name="data_file" id="file-id" class="onFileUpload" />
+              <button type="button" class="btn btn-primary btn-block getJobStatus">Get status</button>
+            </div>
+          </div>
+          <div class="row m-0 p-0">
+            <div class="col-12">
+              <ul id="myUL" t-foreach="widget.project_data" t-as="item">
+                <li>
+                  <div class="row container-item-tree">
+                    <div class="col-2 item-tree">
+                      <div class="caret"></div>
+                    </div>
+                    <div t-att-stage-id='item.stage_id' class="col-10 item-tree stage-up">
+                      <span class="fa fa-flag" style="color: red;"></span>
+                      <span >
+                        <t t-esc="item.stage_name"></t>
+                      </span>
+                    </div>
+                  </div>
+                  <ul class="nested">
+                    <t t-foreach="item.concepts" t-as="concept">
+                      <li>
+                        <div class="row item-tree">
+                          <div class="col-2">
+                            <div class="caret"></div>
+                          </div>
+                          <div class="col-10">
+                            <span class="fa fa-sitemap"></span>
+                            <span t-att-concept-id='concept.concept_id' class="concept-up">
+                              <t t-esc="concept.concept_name"></t>
+                            </span>
+                          </div>
+                        </div>
+                        <ul class="nested">
+                          <!-- MATERIAL -->
+                          <li>
+                            <div class="row item-tree">
+                              <div class="col-2">
+                                <div class="caret"></div>
+                              </div>
+                              <div class="col-10">
+                                <span class="fa fa-cube"></span>
+                                <span>
+                                  Materiales
+                                </span>
+                              </div>
+                            </div>
+                            <ul class="nested">
+                              <!-- MATERIAL -->
+                              <t t-foreach="concept.material" t-as="material">
+                                <li>
+                                  <div class="item-tree">
+                                    <span t-att-concept-id='material[0]' class="concept-up">
+                                      <t t-esc="material[1]"></t>
+                                    </span>
+                                  </div>
+                                </li>
+                              </t>
+                            </ul>
+                          </li>
+                          <!-- WORKFORCE -->
+                          <li>
+                            <div class="row item-tree">
+                              <div class="col-2">
+                                <div class="caret"></div>
+                              </div>
+                              <div class="col-10">
+                                <span class="fa fa-users"></span>
+                                <span>
+                                  Mano de obra
+                                </span>
+                              </div>
+                            </div>
+                            <ul class="nested">
+                              <t t-foreach="concept.workforce" t-as="workforce">
+                                <li>
+                                  <div class="item-tree">
+                                    <span t-att-concept-id='workforce[0]' class="concept-up">
+                                      <t t-esc="workforce[1]"></t>
+                                    </span>
+                                  </div>
+                                </li>
+                              </t>
+                            </ul>
+                          </li>
+                          <!-- MACHINERY -->
+                          <li>
+                            <div class="row item-tree">
+                              <div class="col-2">
+                                <div class="caret"></div>
+                              </div>
+                              <div class="col-10">
+                                <span class="fa fa-train"></span>
+                                <span>
+                                  Maquinaria
+                                </span>
+                              </div>
+                            </div>
+                            <ul class="nested">
+                              <t t-foreach="concept.machinery" t-as="machinery">
+                                <li>
+                                  <div class="item-tree">
+                                    <span t-att-concept-id='machinery[0]' class="concept-up">
+                                      <t t-esc="machinery[1]"></t>
+                                    </span>
+                                  </div>
+                                </li>
+                              </t>
+                            </ul>
+                          </li>
+                          <!-- BASIC -->
+                          <li>
+                            <div class="row item-tree">
+                              <div class="col-2">
+                                <div class="caret"></div>
+                              </div>
+                              <div class="col-10">
+                                <span class="fa fa-cubes"></span>
+                                <span>
+                                  Basicos
+                                </span>
+                              </div>
+                            </div>
+                            <ul class="nested">
+                              <t t-foreach="concept.basic" t-as="basic">
+                                <li>
+                                  <div class="row item-tree">
+                                    <div class="col-2">
+                                      <div class="caret"></div>
+                                    </div>
+                                    <div class="col-10">
+                                      <span class="fa fa-cubes" style="color: blue;"></span>
+                                      <span t-att-concept-id='basic.basic_id' class="basic-up">
+                                        <t t-esc="basic.basic_name"></t>
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <ul class="nested">
+                                    <!-- MATERIAL -->
+                                    <t t-foreach="basic.material" t-as="material">
+                                      <li>
+                                        <div class="item-tree">
+                                          <span class="fa fa-cube"></span>
+                                          <span t-att-basic-id='material[0]' class="basic-up">
+                                            <t t-esc="material[1]"></t>
+                                          </span>
+                                        </div>
+                                      </li>
+                                    </t>
+                                    <!-- WORKFORCE -->
+                                    <t t-foreach="basic.workforce" t-as="workforce">
+                                      <li>
+                                        <div class="item-tree">
+                                          <span class="fa fa-users"></span>
+                                          <span t-att-basic-id='workforce[0]' class="basic-up">
+                                            <t t-esc="workforce[1]"></t>
+                                          </span>
+                                        </div>
+                                      </li>
+                                    </t>
+                                    <!-- MACHINERY -->
+                                    <t t-foreach="basic.machinery" t-as="machinery">
+                                      <li>
+                                        <div class="row item-tree">
+                                          <span class="fa fa-train"></span>
+                                          <span t-att-basic-id='machinery[0]' class="basic-up">
+                                            <t t-esc="machinery[1]"></t>
+                                          </span>
+                                        </div>
+                                      </li>
+                                    </t>
+                                  </ul>
+                                </li>
+                              </t>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </t>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-9">
+          <!-- <div class="row">
+            <div class="col-12">
+              <div id="MyViewerDiv" class="container-viewer"></div>
+            </div>
+          </div> -->
+          <div class="row">
+            <div class="col-11  m-auto">
+              <table class="o_group o_inner_group col-6">
+                <tbody>
+                  <tr>
+                    <td class="o_td_label">
+                      <label class="o_form_label">Código</label>
+                    </td>
+                    <td style="width: 100%">
+                      <span class="o_field_char o_field_widget">
+                        <t t-esc="widget.current_data.concept[0][0]"></t>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="o_td_label">
+                      <label class="o_form_label">Nombre</label>
+                    </td>
+                    <td style="width: 100%">
+                      <span class="o_field_char o_field_widget">
+                        <t t-esc="widget.current_data.concept[0][1]"></t>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="o_group o_inner_group col-5">
+                <tbody>
+                  <tr>
+                    <td class="o_td_label">
+                      <label class="o_form_label">Unidad</label>
+                    </td>
+                    <td style="width: 100%">
+                      <span class="o_field_char o_field_widget">
+                        <t t-esc="widget.current_data.concept[0][2]"></t>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="o_td_label">
+                      <label class="o_form_label">Costo</label>
+                    </td>
+                    <td style="width: 100%">
+                      <span class="o_field_char o_field_widget">
+                        <t t-esc="widget.current_data.concept[0][3]"></t>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <br/>
+          <div class="row m-0 p-0">
+            <div class="o_list_view col-12">
+              <table class="o_list_table table table-sm table-hover table-striped col-12">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Unidad</th>
+                    <th>Cantidad</th>
+                    <th>Costo</th>
+                    <th>Importe</th>
+                  </tr>
+                </thead>
+                <tr class="o-data-row" t-foreach="widget.current_data.data" t-as="element">
+                  <td>
+                    <t t-esc="element[0]"></t>
+                  </td>
+                  <td>
+                    <t t-esc="element[1]"></t>
+                  </td>
+                  <td>
+                    <t t-esc="element[2]"></t>
+                  </td>
+                  <td>
+                    <t t-esc="element[3]"></t>
+                  </td>
+                  <td>
+                    <t t-esc="element[4]"></t>
+                  </td>
+                  <td>
+                    <t t-esc="element[5]"></t>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </t>
+
+</template>

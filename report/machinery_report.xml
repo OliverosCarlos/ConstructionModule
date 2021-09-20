@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="action_project_report_machinery" model="ir.actions.report">
+       <field name="name">Reporte de maquinaria</field>
+       <field name="model">construction.project</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">construction.machinery_report</field>
+       <field name="report_file">construction.machinery_report</field>
+       <field name="print_report_name">'Proyecto - %s' % (object.name)</field>
+       <!-- <field name="binding_model_id" ref="model_construction_project"/> -->
+    </record>
+
+    <template id="machinery_report">
+    <t t-call="web.html_container">
+    <t t-call="web.external_layout">
+        <div class="page">
+            <table class="col-12">
+                <thead>
+                    <tr>
+                        <th colspan="6" class="text-center" style="border: solid 1px black; background-color: cornflowerblue;">Reporte de Maquinaria</th>
+                    </tr>
+                    <tr>
+                        <th style="border: solid 1px black; padding-left: 3px; padding-right: 3px;  background-color: cornflowerblue;" class="text-left">Código</th>
+                        <th style="border: solid 1px black; padding-left: 3px; padding-right: 3px;  background-color: cornflowerblue;" class="text-left">Nombre</th>
+                        <th style="border: solid 1px black; padding-left: 3px; padding-right: 3px;  background-color: cornflowerblue;" class="text-left">Unidad</th>
+                        <th style="border: solid 1px black; padding-left: 3px; padding-right: 3px;  background-color: cornflowerblue;" class="text-right">Precio</th>
+                        <th style="border: solid 1px black; padding-left: 3px; padding-right: 3px;  background-color: cornflowerblue;" class="text-right">Cantidad</th>
+                        <th style="border: solid 1px black; padding-left: 3px; padding-right: 3px;  background-color: cornflowerblue;" class="text-right">Importe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="total_machinery" t-value="0"/>
+                    <t t-foreach="machineries" t-as="machinery">
+                    <tr>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-left"><t t-esc="machinery['code']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-left"><t t-esc="machinery['name']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-left"><t t-esc="machinery['unit']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right">$ <t t-esc="machinery['cost']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right"><t t-esc="machinery['quantity']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right">$ <t t-esc="machinery['import']"></t></td>              
+                    </tr>
+                    <t t-set="total_machinery" t-value="total_machinery+machinery['import']"/>
+                    </t>
+                    <tr>
+                        <th colspan="5" class="text-right" style="border-left: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: whitesmoke;">Total maquinaria:</th>
+                        <th colspan="1" class="text-right" style="border-right: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: whitesmoke;">$ <t t-esc="total_machinery"></t></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </t>
+    </t>
+    </template>
+    </data>
+</odoo>

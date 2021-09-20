@@ -1,0 +1,22 @@
+.container-tree{
+    border-radius: 3px;
+    border: solid 1px black;
+}
+
+.title-tool{
+    color: #4c4c4c;
+    border-bottom: 1px solid #cacaca;
+    background-color: #eee; 
+    padding: 10px;
+    border-bottom:2px solid #dee2e6;
+}
+
+
+.body-tool{
+}
+
+
+.container-viewer{
+    width: 400px;
+    height: 400px;
+}

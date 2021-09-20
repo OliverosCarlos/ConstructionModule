@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- ********************** FORMS ****************************** -->
+    <!-- construction.supplier form view -->
+    <record id="supplier_view_form" model="ir.ui.view">
+        <field name="name">construction.supplier.view.form</field>
+        <field name="model">construction.supplier</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group string="General">
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="web_site"/>
+                        </group>
+                        <group>
+                            <field name="image" widget="image"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Contacto">
+                            <group>
+                                <field name="phone"/>
+                                <field name="email"/>
+                            </group>
+                        </page>
+                        <page string="Dirección">
+                            <group>
+                                <group>
+                                    <field name="street_1"/>
+                                    <field name="int_number"/>
+                                </group>
+                                <group>
+                                    <field name="street_2"/>
+                                    <field name="ext_number"/>
+                                    <field name="zip_supplier"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="state"/>
+                                <field name="city"/>
+                                <field name="country"/>
+                                <field name="neighborhood"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ***************************** SEARCH ************************* -->
+    <record model="ir.ui.view" id="supplier_search_view">
+        <field name="name">supplier.search</field>
+        <field name="model">construction.supplier</field>
+        <field name="arch" type="xml">
+            <search string='Buscar proveedor'>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ********************** TREE VIEWS ************************* -->
+    <!-- construction.supplier tree view -->
+    <record id="supplier_view_tree" model="ir.ui.view">
+        <field name="name">construction.supplier.view.tree</field>
+        <field name="model">construction.supplier</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="web_site" widget="url"/>
+                <field name="phone"/>
+                <field name="email" widget="url"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ********************** KANBAN VIEWS ************************* -->
+    <!-- construction.supplier kanban view -->
+    <record id="supplier_kanban_view" model="ir.ui.view">
+        <field name="name">construction.supplier.kanban</field>
+        <field name="model">construction.supplier</field>
+        <field name="arch" type="xml">
+            <kanban class="o_res_partner_kanban" sample="1">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <field name="image" widget="image"/>
+                            <div class="oe_kanban_details d-flex flex-column">
+                                <strong class="o_kanban_record_title oe_partner_heading">
+                                    <field name="code"/>
+                                </strong>
+                                <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                <ul>
+                                    <li>
+                                        <field name="name"/>
+                                    </li>
+                                    <li>
+                                        <field name="description"/>
+                                    </li>
+                                    <li>
+                                        <field name="web_site" widget="url"/>
+                                    </li>
+                                    <li>
+                                        <field name="phone"/>
+                                    </li>
+                                    <li>
+                                        <field name="email" widget="url"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- ********************** ACTIONS ****************************** -->
+
+    <!-- construction.material action window -->
+    <record id="supplier_list_action" model="ir.actions.act_window">
+        <field name="name">Proveedor</field>
+        <field name="res_model">construction.supplier</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear proveedor.
+            </p>
+        </field>
+    </record>
+
+    <!-- ************************* MENUS ***************************** -->
+
+    <!-- items menu proveedores -->
+    <menuitem id="item_menu_suppliers" name="Proveedores" parent="main_catalogs_menu" action="supplier_list_action"/>
+</odoo>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- construction.calendar form view -->
+    <record id="construction.calendar_view_form" model="ir.ui.view">
+        <field name="name">construction.calendar.view.form</field>
+        <field name="model">construction.calendar</field>
+        <field name="arch" type="xml">
+            <form string="Calendar form">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="calendar"/>
+                            <field name="sundays"/>
+                            <field name="bonus"/>
+                            <field name="holidays"/>
+                            <field name="official_holidays"/>
+                        </group>
+                        <group>
+                            <field name="oficial_days_rest_count"/>
+                            <field name="days_habit_count"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Días oficiales de descanso">
+                            <group>
+                                <field name="oficial_days_rest_id"/>
+                            </group>
+                        </page>
+                        <page string="Días por costumbre">
+                            <group>
+                                <field name="days_habit_id"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- construction.oficial_days_rest form view -->
+    <record id="oficial_days_rest_view_form" model="ir.ui.view">
+        <field name="name">construction.oficial_days_rest.view.form</field>
+        <field name="model">construction.oficial_days_rest</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="day"/>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="quantity"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- construction.days_habit form view -->
+    <record id="days_habit_view_form" model="ir.ui.view">
+        <field name="name">construction.days_habit.view.form</field>
+        <field name="model">construction.days_habit</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="day"/>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="quantity"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ***************************** SEARCH ************************* -->
+
+    <!-- construction.calendar search view -->
+    <record id="calendar_view_search" model="ir.ui.view">
+        <field name="name">construction.calendar.view.search</field>
+        <field name="model">construction.calendar</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- construction.oficial_days_rest search view -->
+    <record id="oficial_days_rest_view_search" model="ir.ui.view">
+        <field name="name">construction.oficial_days_rest.view.search</field>
+        <field name="model">construction.oficial_days_rest</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- construction.days_habit search view -->
+    <record id="days_habit_view_search" model="ir.ui.view">
+        <field name="name">construction.days_habit.view.search</field>
+        <field name="model">construction.days_habit</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ********************** TREE VIEWS ************************* -->
+
+    <!-- construction.calendar tree view -->
+    <record id="calendar_name_view_tree" model="ir.ui.view">
+        <field name="name">construction.calendar.view.tree</field>
+        <field name="model">construction.calendar</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="calendar"/>
+                <field name="sundays"/>
+                <field name="bonus"/>
+                <field name="holidays"/>
+                <field name="oficial_days_rest_count"/>
+                <field name="days_habit_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- construction.oficial_days_rest tree view -->
+    <record id="oficial_days_rest_name_view_tree" model="ir.ui.view">
+        <field name="name">construction.oficial_days_rest.view.tree</field>
+        <field name="model">construction.oficial_days_rest</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="day"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="quantity"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- construction.days_habit tree view -->
+    <record id="days_habit_name_view_tree" model="ir.ui.view">
+        <field name="name">construction.days_habit.view.tree</field>
+        <field name="model">construction.days_habit</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="day"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="quantity"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ********************** ACTIONS ****************************** -->
+
+    <!-- Window action -->
+    <record model="ir.actions.act_window" id="calendar_list_action">
+        <field name="name">Calendario</field>
+        <field name="res_model">construction.calendar</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Agregar un nuevo trabajador</p>
+        </field>
+    </record>
+
+    <!-- Window action -->
+    <record model="ir.actions.act_window" id="oficial_days_rest_list_action">
+        <field name="name">Días oficiales de descanso</field>
+        <field name="res_model">construction.oficial_days_rest</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Agregar un nuevo trabajador</p>
+        </field>
+    </record>
+
+    <!-- Window action -->
+    <record model="ir.actions.act_window" id="days_habit_list_action">
+        <field name="name">Días por costumbre</field>
+        <field name="res_model">construction.days_habit</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Agregar un nuevo trabajador</p>
+        </field>
+    </record>
+
+    <!-- ************************* MENUS ***************************** -->
+
+    <!-- top level menu, no parent -->
+    <menuitem id="main_construction_menu" name="Construction" />
+    <menuitem id="construction_menu" name="Construction" parent="main_construction_menu" />
+    <!-- menu calendar -->
+    <menuitem id="config_calendar_menu" name="Configuración calendario" parent="main_construction_menu"/>
+    <!-- items menu calendar -->
+    <menuitem id="calendar_menu" name="Calendario" parent="config_calendar_menu" action="calendar_list_action"/>
+    <menuitem id="oficial_days_rest_menu" name="Días oficiales de descanso" parent="config_calendar_menu" action="oficial_days_rest_list_action"/>
+    <menuitem id="days_habit_menu" name="Días por costumbre" parent="config_calendar_menu" action="days_habit_list_action"/>
+</odoo>

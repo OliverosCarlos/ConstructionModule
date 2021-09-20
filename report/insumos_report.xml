@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="action_project_report_insumos" model="ir.actions.report">
+       <field name="name">Explosión de insumos</field>
+       <field name="model">construction.project</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">construction.insumos_report</field>
+       <field name="report_file">construction.insumos_report</field>
+       <field name="print_report_name">'Proyecto - %s' % (object.name)</field>
+       <field name="binding_model_id" ref="model_construction_project"/>
+    </record>
+
+    <template id="insumos_report">
+    <t t-call="web.html_container">
+    <t t-call="web.external_layout">
+        <div class="page">
+            <table class="col-12">
+                <thead>
+                    <tr>
+                        <th colspan="6" class="text-center" style="border: solid 1px black; background-color: cornflowerblue;">Reporte de insumos</th>
+                    </tr>
+                    <tr>
+                        <th style="border: solid 1px black; padding-left: 3px; padding-right: 3px;  background-color: cornflowerblue;" class="text-left">Código</th>
+                        <th style="border: solid 1px black; padding-left: 3px; padding-right: 3px;  background-color: cornflowerblue;" class="text-left">Nombre</th>
+                        <th style="border: solid 1px black; padding-left: 3px; padding-right: 3px;  background-color: cornflowerblue;" class="text-left">Unidad</th>
+                        <th style="border: solid 1px black; padding-left: 3px; padding-right: 3px;  background-color: cornflowerblue;" class="text-right">Cantidad</th>
+                        <th style="border: solid 1px black; padding-left: 3px; padding-right: 3px;  background-color: cornflowerblue;" class="text-right">Precio</th>
+                        <th style="border: solid 1px black; padding-left: 3px; padding-right: 3px;  background-color: cornflowerblue;" class="text-right">Importe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="6" class="text-left" style="border: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: gainsboro;">Materiales</td>
+                    </tr>
+                    <t t-set="total_direct_cost" t-value="0"/>
+                    <t t-set="total_materials" t-value="0"/>
+                    <t t-foreach="data['materials']" t-as="materials">
+                    <tr>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-left"><t t-esc="materials['code']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-left"><t t-esc="materials['name']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-left"><t t-esc="materials['unit']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right"><t t-esc="materials['quantity']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right">$ <t t-esc="materials['cost']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right">$ <t t-esc="materials['import']"></t></td>              
+                    </tr>
+                    <t t-set="total_materials" t-value="total_materials+materials['import']"/>
+                    </t>
+                    <tr>
+                        <th colspan="5" class="text-right" style="border-left: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: whitesmoke;">Total Materiales:</th>
+                        <th colspan="1" class="text-right" style="border-right: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: whitesmoke;">$ <t t-esc="total_materials"></t></th>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="text-left" style="border: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: gainsboro;">Mano de obra</td>
+                    </tr>
+                    <t t-set="total_workforce" t-value="0"/>
+                    <t t-foreach="data['workforce']" t-as="workforce">
+                    <tr>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-left"><t t-esc="workforce['code']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-left"><t t-esc="workforce['name']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-left"><t t-esc="workforce['unit']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right"><t t-esc="workforce['quantity']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right">$ <t t-esc="workforce['cost']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right">$ <t t-esc="workforce['import']"></t></td>              
+                    </tr>
+                    <t t-set="total_workforce" t-value="total_workforce+workforce['import']"/>
+                    </t>
+                    <tr>
+                        <th colspan="5" class="text-right" style="border-left: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: whitesmoke;">Total mano de obra:</th>
+                        <th colspan="1" class="text-right" style="border-right: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: whitesmoke;">$ <t t-esc="total_workforce"></t></th>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="text-left" style="border: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: gainsboro;">Maquinaria</td>
+                    </tr>
+                    <t t-set="total_machinery" t-value="0"/>
+                    <t t-foreach="data['machinery']" t-as="machinery">
+                    <tr>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-left"><t t-esc="machinery['code']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-left"><t t-esc="machinery['name']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-left"><t t-esc="machinery['unit']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right"><t t-esc="machinery['quantity']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right">$ <t t-esc="machinery['cost']"></t></td>
+                        <td style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right">$ <t t-esc="machinery['import']"></t></td>              
+                    </tr>
+                    <t t-set="total_machinery" t-value="total_machinery+machinery['import']"/>
+                    </t>
+                    <tr>
+                        <th colspan="5" class="text-right" style="border-left: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: whitesmoke;">Total maquinaria:</th>
+                        <th colspan="1" class="text-right" style="border-right: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: whitesmoke;">$ <t t-esc="total_machinery"></t></th>
+                    </tr>
+                    <t t-set="total_direct_cost" t-value="total_materials+total_workforce+total_machinery"/>
+                    <tr>
+                        <th colspan="5" class="text-right" style="border-left: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: whitesmoke;">Total costos directos:</th>
+                        <th colspan="1" class="text-right" style="border-right: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: whitesmoke;">$ <t t-esc="total_direct_cost"></t></th>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="text-left" style="border: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: gainsboro;">Costos indirectos</td>
+                    </tr>
+                    <t t-set="total_indirect_cost" t-value="0"/>
+                    <t t-foreach="data['indirect_costs']" t-as="indirect_cost">
+                        <tr>
+                            <t t-if="indirect_cost[3] == '0'">
+                                <td colspan="5" style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right"><t t-esc="indirect_cost[0]"></t></td>
+                                <td colspan="1" style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right">$ <t t-esc="indirect_cost[1]"></t></td>
+                                <t t-set="total_indirect_cost" t-value="total_indirect_cost+indirect_cost[1]"/>
+                            </t>
+                            <t t-if="indirect_cost[3] == '1'">
+                                <td colspan="5" style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right"><t t-esc="indirect_cost[0]"></t> (<t t-esc="indirect_cost[2]"></t>%)</td>
+                                <t t-set="current_cost" t-value="total_direct_cost*indirect_cost[2]"/>
+                                <t t-set="total_indirect_cost" t-value="total_indirect_cost+current_cost"/>
+                                <td colspan="1" style="border: solid 1px black; padding-left: 3px; padding-right: 3px;" class="text-right"><t t-esc="current_cost"></t></td> 
+                            </t>         
+                        </tr>
+                    </t>
+                    <tr>
+                        <th colspan="5" class="text-right" style="border-left: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: whitesmoke;">Total costos indirectos:</th>
+                        <th colspan="1" class="text-right" style="border-right: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: whitesmoke;">$ <t t-esc="total_indirect_cost"></t></th>
+                    </tr>
+                    <t t-set="total_cost" t-value="total_direct_cost+total_indirect_cost"/>
+                    <tr>
+                        <th colspan="5" class="text-right" style="border-left: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: whitesmoke;">Total de obra:</th>
+                        <th colspan="1" class="text-right" style="border-right: solid 1px black; padding-left: 3px; padding-right: 3px; background-color: whitesmoke;">$ <t t-esc="total_cost"></t></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </t>
+    </t>
+    </template>
+    </data>
+</odoo>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ********************** FORMS ****************************** -->
+    <!-- construction.bim form view -->
+    <record id="bim_view_form" model="ir.ui.view">
+        <field name="name">construction.bim.view.form</field>
+        <field name="model">construction.bim</field>
+        <field name="arch" type="xml">
+            <form string="Proyecto">
+                <div class="col-12">
+                    <div class="tree-folder-widget">
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- ***************************** SEARCH ************************* -->
+    <!-- construction.bim form view -->
+    <record model="ir.ui.view" id="bim_search_view">
+        <field name="name">bim.search</field>
+        <field name="model">construction.bim</field>
+        <field name="arch" type="xml">
+            <search string='Buscar proyecto'>
+                <field name="project"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ********************** TREE VIEWS ************************* -->
+    <!-- construction.bim tree view -->
+    <record id="bim_view_tree" model="ir.ui.view">
+        <field name="name">construction.bim.view.tree</field>
+        <field name="model">construction.bim</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="project"/>
+            </tree>
+        </field>
+    </record>
+    <!-- ********************** ACTIONS ****************************** -->
+
+    <!-- construction.bim action window -->
+    <record id="bim_list_action" model="ir.actions.act_window">
+        <field name="name">Proyectos</field>
+        <field name="res_model">construction.bim</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Bim.
+            </p>
+        </field>
+    </record>
+
+    <!-- menu projects -->
+    <menuitem id="main_bim_menu" name="Bim" parent="main_construction_menu"/>
+    <!-- items menu projectes -->
+    <menuitem id="item_menu_bim" name="Bim proyectos" parent="main_bim_menu" action="bim_list_action"/>
+</odoo>

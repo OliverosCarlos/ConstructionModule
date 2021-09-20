@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template id="model_select_view_widget_template" xml:space="preserve">
+  <t t-name='construction.model_select_view_widget'>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-6">
+          <table class="o_group o_inner_group">
+            <tbody>
+              <tr>
+                <td class="o_td_label">
+                  <label class="o_form_label">ID del modelo</label>
+                </td>
+                <td class="col-12">
+                  <input id="model-display-id" class="o_field_char o_field_widget o_input" t-att-disabled="'disabled'" />
+                </td>
+              </tr>
+              <tr>
+                <td class="o_td_label">
+                  <label class="o_form_label">Nombre del modelo</label>
+                </td>
+                <td class="col-12">
+                  <input id="model-display-name" class="o_field_char o_field_widget o_input" t-att-disabled="'disabled'" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-6">
+          <button type="button" class="col btn btn-primary btn-block setModel mt-2">Establecer modelo</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <ul id="myUL" t-foreach="widget.menu" t-as="item">
+            <li>
+              <div t-att-item-id='item.id' class="row cntr-folder">
+                <div class="folder-icon">
+                  <span class="fa fa-folder"></span>
+                </div>
+                <div class="folder-title">
+                  <span>
+                    <t t-esc="item.name"></t>
+                  </span>
+                </div>
+              </div>
+              <ul class="nested">
+                <t t-foreach="item.childs" t-as="element">
+                  <li>
+                    <div t-att-element-id='element.id' class="row cntr-folder">
+                      <div class="folder-icon">
+                        <span class="fa fa-folder"></span>
+                      </div>
+                      <div class="folder-title">
+                        <span>
+                          <t t-esc="element.name"></t>
+                        </span>
+                      </div>
+                    </div>
+                    <ul class="nested">
+                      <t t-foreach="element.files" t-as="files">
+                        <li>
+                          <div class="row model-item" t-att-model-id='files.urn' t-att-model-name='files.name'>
+                            <div class="col-10">
+                              <span class="fa fa-cubes"></span>
+                              <span class="renderFile">
+                                <t t-esc="files.name"></t>
+                              </span>
+                              <img t-att-src='files.thumbnail' alt="" class="thumbnail-model" />
+                            </div>
+                          </div>
+                        </li>
+                      </t>
+                    </ul>
+                  </li>
+                </t>
+                <t t-foreach="item.files" t-as="element">
+                  <li>
+                    <div class="row model-item" t-att-model-id='element.urn' t-att-model-name='element.name'>
+                      <div class="col-10">
+                        <span class="fa fa-cubes"></span>
+                        <span>
+                          <t t-esc="element.name"></t>
+                        </span>
+                        <img t-att-src='element.thumbnail' alt="" class="thumbnail-model" />
+                      </div>
+                    </div>
+                  </li>
+                </t>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </t>
+</template>

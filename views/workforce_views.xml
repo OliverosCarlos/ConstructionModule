@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- construction.workforce form view -->
+    <record id="workforce_view_form" model="ir.ui.view">
+        <field name="name">construction.workforce.view.form</field>
+        <field name="model">construction.workforce</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="w_unit"/>
+                            <field name="performance"/>
+                            <field name="coin"/>
+                            <field name="currency_id" invisible="1" />
+                            <field name="cost" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Cuadrilla tst">
+                            <field name="team_lines">
+                                <tree string='Cuadrilla' editable="bottom">
+                                    <field name="worker_type_id"/>
+                                    <field name="quantity"/>
+                                    <field name="worker_type_coin"/>
+                                    <field name="worker_type_cost" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                    <field name="subtotal" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                    <field name="currency_id" invisible="1" />
+                                    <field name="workforce_id" invisible='1'/>
+                                    <!-- <control>
+                                        <create name="add_product_control" string="Add a product"/>
+                                        <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                        <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                                    </control> -->
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="worker_type_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="quantity"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Worker form -->
+    <record model="ir.ui.view" id="worker_form_view">
+        <field name="name">worker.form</field>
+        <field name="model">construction.worker</field>
+        <field name="arch" type="xml">
+            <form string="Worker form">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="photo" widget="image"/>
+                        </group>
+                        <group>
+                            <field name="unit"/>
+                            <field name="performance"/>
+                            <field name="price" widget="monetary"/>
+                            <field name="coin"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Perfil">
+                            <group>
+                                <field name="worker_type"/>
+                            </group>
+                        </page>
+                        <page string="FASAR">
+                            <group>
+                                <group>
+                                    <field name="salary"/>
+                                    <field name="tp"/>
+                                    <field name="ti"/>
+                                    <field name="fsr"/>
+                                    <field name="fsn"/>
+                                    <field name="sn"/>
+                                    <field name="sr"/>
+                                </group>
+                                <group>
+                                    <field name="calendar_id"/>
+                                    <field name="calendar"/>
+                                    <field name="sundays"/>
+                                    <field name="bonus"/>
+                                    <field name="holidays"/>
+                                    <field name="oficial_days_rest_count"/>
+                                    <field name="days_habit_count"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- construction.worker_type form view -->
+    <record id="worker_type_view_form" model="ir.ui.view">
+        <field name="name">construction.worker_type.view.form</field>
+        <field name="model">construction.worker_type</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="w_unit"/>
+                            <field name="currency_id" invisible="1" />
+                            <field name="cost" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="coin"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ***************************** SEARCH ************************* -->
+
+    <!-- construction.workforce search view -->
+    <record id="workforce_view_search" model="ir.ui.view">
+        <field name="name">construction.workforce.view.search</field>
+        <field name="model">construction.workforce</field>
+        <field name="arch" type="xml">
+            <search string="Buscar mano de obra">
+                <field name="name"/>
+                <field name="code"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- search -->
+    <record model="ir.ui.view" id="worker_search_view">
+        <field name="name">worker.search</field>
+        <field name="model">construction.worker</field>
+        <field name="arch" type="xml">
+            <search string='Buscar trabajador'>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="worker_type"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- search -->
+    <record model="ir.ui.view" id="worker_type_search_view">
+        <field name="name">worker_type.search</field>
+        <field name="model">construction.worker_type</field>
+        <field name="arch" type="xml">
+            <search string='Buscar trabajador'>
+                <field name="code"/>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ********************** TREE VIEWS ************************* -->
+
+    <!-- construction.workforce tree view -->
+    <record id="workforce_view_tree" model="ir.ui.view">
+        <field name="name">construction.workforce.view.tree</field>
+        <field name="model">construction.workforce</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="w_unit"/>
+                <field name="coin"/>
+                <field name="performance"/>
+                <field name="currency_id" invisible="1" />
+                <field name="cost" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- worker tree -->
+    <record model="ir.ui.view" id="worker_tree_view">
+        <field name="name">worker.tree</field>
+        <field name="model">construction.worker</field>
+        <field name="arch" type="xml">
+            <tree string="Trabajadores">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="worker_type"/>
+                <field name="performance"/>
+                <field name="price"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- worker_type tree -->
+    <record model="ir.ui.view" id="worker_type_tree_view">
+        <field name="name">worker_type.tree</field>
+        <field name="model">construction.worker_type</field>
+        <field name="arch" type="xml">
+            <tree string="Trabajadores">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="w_unit"/>
+                <field name="coin"/>
+                <field name="currency_id" invisible="1" />
+                <field name="cost" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ********************** KANBAN  ****************************** -->
+    <!-- Worker kanban -->
+    <record model="ir.ui.view" id="worker_view_kanban">
+        <field name="name">construction.worker.view.kanban</field>
+        <field name="model">construction.worker</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="code">
+                <field name="bonus"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_color_{{kanban_getcolor(record.bonus.raw_value)}}
+                                                  oe_kanban_global_click_edit oe_semantic_html_override
+                                                  oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
+                            <div class="oe_dropdown_kanban">
+                                <!-- dropdown menu -->
+                                <div class="oe_dropdown_toggle">
+                                    <i class="fa fa-bars fa-lg" title="Manage" aria-label="Manage"/>
+                                    <ul class="oe_dropdown_menu">
+                                        <li>
+                                            <a type="delete">Delete</a>
+                                        </li>
+                                        <li>
+                                            <ul class="oe_kanban_colorpicker" data-field="bonus"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                            <div t-attf-class="oe_kanban_content">
+                                <div class="row">
+                                    <div class="col-7">
+                                        Nombre: 
+                                        <field name="name"/>
+                                        <br/>
+                                        Precio: 
+                                        <field name="price"/>
+                                        <br/>
+                                        Tipo: 
+                                        <field name="worker_type"/>
+                                    </div>
+                                    <div class="col-5">
+                                        <field name="photo" widget="image"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- ********************** ACTIONS ****************************** -->
+
+    <!-- construction.workforce action window -->
+    <record id="workforce_list_action" model="ir.actions.act_window">
+        <field name="name">Cuadrilla</field>
+        <field name="res_model">construction.workforce</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear cuadrilla.
+            </p>
+            <p>
+                Definir una nueva cuadrilla.
+            </p>
+        </field>
+    </record>
+
+    <!-- Window action -->
+    <record model="ir.actions.act_window" id="worker_list_action">
+        <field name="name">Trabajadores</field>
+        <field name="res_model">construction.worker</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Agregar un nuevo trabajador</p>
+        </field>
+    </record>
+
+    <!-- Window action -->
+    <record model="ir.actions.act_window" id="worker_type_list_action">
+        <field name="name">Trabajadores</field>
+        <field name="res_model">construction.worker_type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Agregar un nuevo tipo de trabajador</p>
+        </field>
+    </record>
+
+    <!-- ************************* MENUS ***************************** -->
+
+    <!-- menu workforce -->
+    <menuitem id="main_workforce_menu" name="Mano de obra" parent="main_construction_menu"/>
+    <!-- items menu worforce -->
+    <menuitem id="workforces_menu" name="Cuadrilla" parent="main_workforce_menu" action="workforce_list_action"/>
+    <menuitem id="workers_menu" name="Trabajadores" parent="main_workforce_menu" action="worker_list_action"/>
+    <menuitem id="worker_type_menu" name="Tipo de trabajador" parent="main_workforce_menu" action="worker_type_list_action"/>
+
+</odoo>

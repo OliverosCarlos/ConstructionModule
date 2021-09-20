@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" inherit_id="web.assets_backend" name="tree_concepts_template">
+        <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript" src="/construction/static/src/js/tree_view_construction.js"></script>
+            <link rel="stylesheet" href="/site/static/src/css/style.css" />
+            <!-- *************** BIM WIDGET ************** -->
+            <script type="text/javascript" src="/construction/static/src/js/tree_view_folders.js"></script>
+            <script type="text/javascript" src="/construction/static/src/js/my_extension.js"></script>
+            <script type="text/javascript" src="/construction/static/src/js/utils.js"></script>
+
+            <!-- *************** MODEL SELECT WIDGET ************ -->
+            <script type="text/javascript" src="/construction/static/src/js/model_select.js"></script>
+
+            <!-- *************** MODEL VIEWER WIDGET ************ -->
+            <script type="text/javascript" src="/construction/static/src/js/model_viewer.js"></script>
+
+            <!-- *************** MODEL BUDGET ************ -->
+            <script type="text/javascript" src="/construction/static/src/js/budget_view.js"></script>
+
+            <script type="text/javascript" src="/site/static/src/js/site.js"></script>
+            <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css" type="text/css" />
+            <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.min.js"></script>
+        </xpath>
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" href="/construction/static/src/css/tree_view_construction.css" />
+            <link rel="stylesheet" href="/construction/static/src/css/tree_view_folders.css" />
+
+            <!-- *************** MODEL SELECT WIDGET ************ -->
+            <link rel="stylesheet" href="/construction/static/src/css/model_select.css" />
+
+            <!-- *************** MODEL VIEWER WIDGET ************ -->
+            <link rel="stylesheet" href="/construction/static/src/css/model_viewer.css" />
+
+            <!-- *************** MODEL BUDGET ************ -->
+            <link rel="stylesheet" href="/construction/static/src/css/budget_view.css" />
+        </xpath>
+    </template>
+
+    <!-- <record id="view_tree_concepts" model="ir.ui.view">
+        <field name="name">Vista de arbol de conceptos</field>
+        <field name="model">construction.project</field>
+        <field name="inherit_id" ref="construction.project_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('tree-construction-widget')]" position="inside">
+                <field name="name" widget="tree_concepts"/>
+            </xpath>
+        </field>
+    </record> -->
+
+    <record id="view_tree_folders" model="ir.ui.view">
+        <field name="name">Vista de arbol</field>
+        <field name="model">construction.bim</field>
+        <field name="inherit_id" ref="construction.bim_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('tree-folder-widget')]" position="inside">
+                <field name="project" widget="tree_folders"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="model_select_view" model="ir.ui.view">
+        <field name="name">construction.model.select.view</field>
+        <field name="model">construction.project</field>
+        <field name="inherit_id" ref="construction.project_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('model-select-widget')]" position="inside">
+                <field name="forge_model_select" widget="model_select"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_model_viewer" model="ir.ui.view">
+        <field name="name">Visor de modelo</field>
+        <field name="model">construction.stage</field>
+        <field name="inherit_id" ref="construction.stage_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('container-model-viewer')]" position="inside">
+                <field name="bim_model_viewer" widget="model_viewer"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="budget_widget_container" model="ir.ui.view">
+        <field name="name">vista presupuesto</field>
+        <field name="model">construction.budgets_wizard</field>
+        <field name="inherit_id" ref="construction.budget_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('budget_widget_container')]" position="inside">
+                <field name="project_id" widget="budget"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

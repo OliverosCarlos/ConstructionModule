@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template id="model_viewer_view_widget_template" xml:space="preserve">
+  <t t-name='construction.model_viewer_view_widget'>
+    <div class="col-12 container-tree m-0 p-0">
+        <div id="forgeViewer" class="container-viewer"></div>
+    </div>
+  </t>
+</template>

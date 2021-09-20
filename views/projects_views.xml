@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ********************** FORMS ****************************** -->
+    <!-- construction.project form view -->
+    <record id="project_view_form" model="ir.ui.view">
+        <field name="name">construction.project.view.form</field>
+        <field name="model">construction.project</field>
+        <field name="arch" type="xml">
+            <form string="Proyecto">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="open_budget_wizard" string="Presupuesto" type="object" icon="fa-bars"/>
+                    </div>
+                    <group>
+                        <group string="General">
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="project_type"/>
+                            <field name="contract_type"/>
+                            <field name="cost"/>
+                            <field name="total_indirect_cost"/>
+                            <field name="total_cost"/>
+                        </group>
+                        <group string="Imagen del proyecto">
+                            <field name="image" widget="image"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Cliente">
+                            <group>
+                                <group>
+                                    <field name="client_id"/>
+                                    <field name="client_name"/>
+                                    <field name="client_function"/>
+                                </group>
+                                <group>
+                                    <field name="client_phone" widget="phone"/>
+                                    <field name="client_email" widget="email"/>
+                                    <field name="client_website" widget="url"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Partidas">
+                            <field name="stages"/>
+                        </page>
+                        <page string="Bim">
+                            <div class="model-select-widget"></div>
+                        </page>
+                        <page string="Costos indirectos">
+                            <field name="indirect_costs"/>
+                        </page>
+                        <page string="Dirección">
+                            <group>
+                                <group>
+                                    <field name="street_1"/>
+                                    <field name="int_number"/>
+                                </group>
+                                <group>
+                                    <field name="street_2"/>
+                                    <field name="ext_number"/>
+                                    <field name="zip_supplier"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="state"/>
+                                <field name="city"/>
+                                <field name="country"/>
+                                <field name="neighborhood"/>
+                            </group>
+                        </page>
+                        <page string="FASAR">
+                            <group>
+                                <group>
+                                    <field name="calendar_id"/>
+                                    <field name="calendar"/>
+                                    <field name="sundays"/>
+                                    <field name="bonus"/>
+                                </group>
+                                <group>
+                                    <field name="holidays"/>
+                                    <field name="oficial_days_rest_count"/>
+                                    <field name="days_habit_count"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- construction.stage form view -->
+    <record id="stage_view_form" model="ir.ui.view">
+        <field name="name">construction.stage.view.form</field>
+        <field name="model">construction.stage</field>
+        <field name="arch" type="xml">
+            <form string="Partida">
+                <sheet>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="row">
+                                    <group>
+                                        <field name="code"/>
+                                        <field name="name"/>
+                                        <field name="description"/>
+
+                                        <field name="cost"/>
+                                        <field name="unit"/>
+                                        <field name="project_id"/>
+                                        <field name="project_forge_model_name"/>
+                                        <field name="project_forge_model_id" invisible="1"/>
+                                    </group>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row title-tool">
+                                            <p class="o_form_label">Propiedades</p>
+                                        </div>
+                                        <div class="row body-tool">
+                                            <div id="stage-model-object-properties" class="col-12">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="container-model-viewer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="Material">
+                            <field name="stage_material_lines">
+                                <tree string='Material' editable="bottom">
+                                    <field name="material_id"/>
+                                    <field name="material_unit"/>
+                                    <field name="quantity"/>
+                                    <field name="material_cost"/>
+                                    <field name="waste" widget="percentage"/>
+                                    <field name="m_import"/>
+                                    <field name="stage_id" invisible='1'/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="material_id"/>
+                                        </group>
+                                        <group>
+                                            <field name="quantity"/>
+                                            <field name="waste" widget="percentage"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Mano de obra">
+                            <field name="stage_workforce_lines">
+                                <tree string='Cuadrilla' editable="bottom">
+                                    <field name="workforce_id"/>
+                                    <field name="workforce_unit"/>
+                                    <field name="quantity"/>
+                                    <field name="workforce_cost"/>
+                                    <field name="w_import"/>
+                                    <field name="stage_id" invisible='1'/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="workforce_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="quantity"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Maquinaria">
+                            <field name="stage_machinery_lines">
+                                <tree string='Maquinaria' editable="bottom">
+                                    <field name="machinery_id"/>
+                                    <field name="machinery_unit"/>
+                                    <field name="quantity"/>
+                                    <field name="machinery_cost"/>
+                                    <field name="m_import"/>
+                                    <field name="stage_id" invisible='1'/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="machinery_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="quantity"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Conceptos">
+                            <field name="concepts">
+                                <tree string='Concepto' editable="bottom">
+                                    <field name="concept_id"/>
+                                    <field name="concept_unit"/>
+                                    <field name="quantity"/>
+                                    <field name="concept_cost"/>
+                                    <field name="s_import"/>
+                                    <field name="stage_id" invisible='1'/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="concept_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="quantity"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- construction.concept form view -->
+    <record id="concept_view_form" model="ir.ui.view">
+        <field name="name">construction.concept.view.form</field>
+        <field name="model">construction.concept</field>
+        <field name="arch" type="xml">
+            <form string="Concepto">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="unit"/>
+                        </group>
+                        <group>
+                            <field name="cost"/>
+                            <field name="material_import"/>
+                            <field name="workforce_import"/>
+                            <field name="machinery_import"/>
+                            <field name="basic_import"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Descripción">
+                            <field name="description"/>
+                        </page>
+                        <page string="Material">
+                            <field name="concept_material_lines">
+                                <tree string='Material' editable="bottom">
+                                    <field name="material_id"/>
+                                    <field name="material_unit"/>
+                                    <field name="quantity"/>
+                                    <field name="material_cost"/>
+                                    <field name="waste" widget="percentage"/>
+                                    <field name="m_import"/>
+                                    <field name="concept_id" invisible='1'/>
+                                </tree>
+                                <form>
+                                <group>
+                                    <group>
+                                        <field name="material_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="quantity"/>
+                                        <field name="waste" widget="percentage"/>
+                                    </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Mano de obra">
+                            <field name="concept_workforce_lines">
+                                <tree string='Cuadrilla' editable="bottom">
+                                    <field name="workforce_id"/>
+                                    <field name="workforce_unit"/>
+                                    <field name="quantity"/>
+                                    <field name="workforce_cost"/>
+                                    <field name="w_import"/>
+                                    <field name="concept_id" invisible='1'/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="workforce_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="quantity"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Maquinaria">
+                            <field name="concept_machinery_lines">
+                                <tree string='Maquinaria' editable="bottom">
+                                    <field name="machinery_id"/>
+                                    <field name="machinery_unit"/>
+                                    <field name="quantity"/>
+                                    <field name="machinery_cost"/>
+                                    <field name="m_import"/>
+                                    <field name="concept_id" invisible='1'/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="machinery_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="quantity"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Básicos">
+                            <field name="concept_basic_lines">
+                                <tree string='Concepto' editable="bottom">
+                                    <field name="basic_id"/>
+                                    <field name="basic_unit"/>
+                                    <field name="quantity"/>
+                                    <field name="basic_cost"/>
+                                    <field name="b_import"/>
+                                    <field name="concept_id" invisible='1'/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="basic_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="quantity"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- construction.basic form view -->
+    <record id="basic_view_form" model="ir.ui.view">
+        <field name="name">construction.basic.view.form</field>
+        <field name="model">construction.basic</field>
+        <field name="arch" type="xml">
+            <form string="Básico">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="unit"/>
+                        </group>
+                        <group>
+                            <field name="cost"/>
+                            <field name="material_import"/>
+                            <field name="workforce_import"/>
+                            <field name="machinery_import"/>
+                        </group>
+
+                    </group>
+                    <notebook>
+                        <page string="Descripción">
+                            <field name="description"/>
+                        </page>
+                        <page string="Material">
+                            <field name="basic_material_lines">
+                                <tree string='Material' editable="bottom">
+                                    <field name="material_id"/>
+                                    <field name="material_unit"/>
+                                    <field name="quantity"/>
+                                    <field name="material_cost"/>
+                                    <field name="waste" widget="percentage"/>
+                                    <field name="m_import"/>
+                                    <field name="basic_id" invisible='1'/>
+                                </tree>
+                                <form>
+                                <group>
+                                    <group>
+                                        <field name="material_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="quantity"/>
+                                        <field name="waste" widget="percentage"/>
+                                    </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Mano de obra">
+                            <field name="basic_workforce_lines">
+                                <tree string='Cuadrilla' editable="bottom">
+                                    <field name="workforce_id"/>
+                                    <field name="workforce_unit"/>
+                                    <field name="quantity"/>
+                                    <field name="workforce_cost"/>
+                                    <field name="w_import"/>
+                                    <field name="basic_id" invisible='1'/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="workforce_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="quantity"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Maquinaria">
+                            <field name="basic_machinery_lines">
+                                <tree string='Maquinaria' editable="bottom">
+                                    <field name="machinery_id"/>
+                                    <field name="machinery_unit"/>
+                                    <field name="quantity"/>
+                                    <field name="machinery_cost"/>
+                                    <field name="m_import"/>
+                                    <field name="basic_id" invisible='1'/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="machinery_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="quantity"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ***************************** SEARCH ************************* -->
+    <!-- construction.project form view -->
+    <record model="ir.ui.view" id="project_search_view">
+        <field name="name">project.search</field>
+        <field name="model">construction.project</field>
+        <field name="arch" type="xml">
+            <search string='Buscar proyecto'>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- construction.stage form view -->
+    <record model="ir.ui.view" id="stage_search_view">
+        <field name="name">stage.search</field>
+        <field name="model">construction.stage</field>
+        <field name="arch" type="xml">
+            <search string='Buscar partida'>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- construction.concept form view -->
+    <record model="ir.ui.view" id="concept_search_view">
+        <field name="name">concept.search</field>
+        <field name="model">construction.concept</field>
+        <field name="arch" type="xml">
+            <search string='Buscar concepto'>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- construction.basic form view -->
+    <record model="ir.ui.view" id="basic_search_view">
+        <field name="name">basic.search</field>
+        <field name="model">construction.basic</field>
+        <field name="arch" type="xml">
+            <search string='Buscar Básico'>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ********************** TREE VIEWS ************************* -->
+    <!-- construction.project tree view -->
+    <record id="project_view_tree" model="ir.ui.view">
+        <field name="name">construction.project.view.tree</field>
+        <field name="model">construction.project</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="unit"/>
+                <field name="cost"/>
+                <field name="forge_model_id"/>
+                <field name="forge_model_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- construction.stage tree view -->
+    <record id="stage_view_tree" model="ir.ui.view">
+        <field name="name">construction.stage.view.tree</field>
+        <field name="model">construction.stage</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="cost"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- construction.concept tree view -->
+    <record id="concept_view_tree" model="ir.ui.view">
+        <field name="name">construction.concept.view.tree</field>
+        <field name="model">construction.concept</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="unit"/>
+                <field name="cost"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- construction.basic tree view -->
+    <record id="basic_view_tree" model="ir.ui.view">
+        <field name="name">construction.basic.view.tree</field>
+        <field name="model">construction.basic</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="unit"/>
+                <field name="cost"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ********************** ACTIONS ****************************** -->
+
+    <!-- construction.project action window -->
+    <record id="project_list_action" model="ir.actions.act_window">
+        <field name="name">Proyectos</field>
+        <field name="res_model">construction.project</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear nuevo proyecto.
+            </p>
+        </field>
+    </record>
+
+    <!-- construction.stage action window -->
+    <record id="stage_list_action" model="ir.actions.act_window">
+        <field name="name">Partidas</field>
+        <field name="res_model">construction.stage</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear nueva partida.
+            </p>
+        </field>
+    </record>
+
+    <!-- construction.concept action window -->
+    <record id="concept_list_action" model="ir.actions.act_window">
+        <field name="name">Conceptos</field>
+        <field name="res_model">construction.concept</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear nuevo Concepto.
+            </p>
+        </field>
+    </record>
+
+    <!-- construction.basic action window -->
+    <record id="basic_list_action" model="ir.actions.act_window">
+        <field name="name">Básicos</field>
+        <field name="res_model">construction.basic</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear nuevo básico.
+            </p>
+        </field>
+    </record>
+
+    <!-- ************************* MENUS ***************************** -->
+
+    <!-- menu projects -->
+    <menuitem id="main_projects_menu" name="Proyectos" parent="main_construction_menu"/>
+    <!-- items menu projectes -->
+    <menuitem id="item_menu_projects" name="Obras/proyectos" parent="main_projects_menu" action="project_list_action"/>
+    <menuitem id="item_menu_stages" name="Partidas" parent="main_projects_menu" action="stage_list_action"/>
+    <menuitem id="item_menu_concepts" name="Conceptos" parent="main_projects_menu" action="concept_list_action"/>
+    <menuitem id="item_menu_basics" name="Básicos" parent="main_projects_menu" action="basic_list_action"/>
+</odoo>
+
+<!-- <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="name"/>
+                                <field name="description"/>
+                            </group>
+                            <group>
+                                <field name="unit"/>
+                                <field name="cost"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Partidas">
+                                <field name="stages">
+                                    <tree string='Partida' editable="bottom">
+                                        <field name="stage_id"/>
+                                        <field name="stage_unit"/>
+                                        <field name="quantity"/>
+                                        <field name="stage_cost"/>
+                                        <field name="s_import"/>
+                                        <field name="project_id" invisible='1'/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="stage_id"/>
+                                        </group>
+                                        <group>
+                                            <field name="quantity"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook> -->

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- ********************** FORMS ****************************** -->
+    <!-- construction.unit form view -->
+    <record id="unit_view_form" model="ir.ui.view">
+        <field name="name">construction.unit.view.form</field>
+        <field name="model">construction.unit</field>
+        <field name="arch" type="xml">
+            <form string="Unidades">
+                <sheet>
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                        <field name="magnitude"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- construction.client_approach_type form view -->
+    <record id="client_approach_type_view_form" model="ir.ui.view">
+        <field name="name">construction.client_approach_type.view.form</field>
+        <field name="model">construction.client_approach_type</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="description"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- construction.project_type form view -->
+    <record id="project_type_view_form" model="ir.ui.view">
+        <field name="name">construction.project_type.view.form</field>
+        <field name="model">construction.project_type</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- construction.contract_type form view -->
+    <record id="contract_type_view_form" model="ir.ui.view">
+        <field name="name">construction.contract_type.view.form</field>
+        <field name="model">construction.contract_type</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- construction.indirect_cost form view -->
+    <record id="indirect_cost_view_form" model="ir.ui.view">
+        <field name="name">construction.indirect_cost.view.form</field>
+        <field name="model">construction.indirect_cost</field>
+        <field name="arch" type="xml">
+            <form string="Costos">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="cost" attrs="{'invisible': [('cost_type','==','1')]}"/>
+                            <field name="percentage" attrs="{'invisible': [('cost_type','==','0')]}" widget="percentage"/>
+                            <field name="cost_type"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ***************************** SEARCH ************************* -->
+    <!-- construction.unit form view -->
+    <record model="ir.ui.view" id="unit_search_view">
+        <field name="name">project.search</field>
+        <field name="model">construction.unit</field>
+        <field name="arch" type="xml">
+            <search string='Buscar unidad'>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="magnitude"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- construction.client_approach_type search view -->
+    <record id="client_approach_type_view_search" model="ir.ui.view">
+        <field name="name">construction.client_approach_type.view.search</field>
+        <field name="model">construction.client_approach_type</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- construction.project_type search view -->
+    <record id="project_type_view_search" model="ir.ui.view">
+        <field name="name">construction.project_type.view.search</field>
+        <field name="model">construction.project_type</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- construction.contract_type search view -->
+    <record id="contract_type_view_search" model="ir.ui.view">
+        <field name="name">construction.contract_type.view.search</field>
+        <field name="model">construction.contract_type</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- construction.indirect_cost form view -->
+    <record model="ir.ui.view" id="indirect_cost_search_view">
+        <field name="name">project.search</field>
+        <field name="model">construction.indirect_cost</field>
+        <field name="arch" type="xml">
+            <search string='Buscar costo'>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ********************** TREE VIEWS ************************* -->
+    <!-- construction.unit tree view -->
+    <record id="unit_view_tree" model="ir.ui.view">
+        <field name="name">construction.unit.view.tree</field>
+        <field name="model">construction.unit</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="magnitude"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- construction.client_approach_type tree view -->
+    <record id="client_approach_type_view_tree" model="ir.ui.view">
+        <field name="name">construction.client_approach_type.view.tree</field>
+        <field name="model">construction.client_approach_type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- construction.project_type tree view -->
+    <record id="project_type_view_tree" model="ir.ui.view">
+        <field name="name">construction.project_type.view.tree</field>
+        <field name="model">construction.project_type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- construction.contract_type tree view -->
+    <record id="contract_type_view_tree" model="ir.ui.view">
+        <field name="name">construction.contract_type.view.tree</field>
+        <field name="model">construction.contract_type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- construction.indirect_cost tree view -->
+    <record id="indirect_cost_view_tree" model="ir.ui.view">
+        <field name="name">construction.indirect_cost.view.tree</field>
+        <field name="model">construction.indirect_cost</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="cost"/>
+                <field name="percentage"/>
+                <field name="cost_type"/>
+            </tree>
+        </field>
+    </record>
+    <!-- ********************** ACTIONS ****************************** -->
+    <!-- construction.unit action window -->
+    <record id="unit_list_action" model="ir.actions.act_window">
+        <field name="name">Unidades</field>
+        <field name="res_model">construction.unit</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear nueva unidad.
+            </p>
+        </field>
+    </record>
+
+    <!-- construction.client_approach_type action window -->
+    <record id="client_approach_type_list_action" model="ir.actions.act_window">
+        <field name="name">Tipos de enfoque clientes</field>
+        <field name="res_model">construction.client_approach_type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear nuevo tipo de enfoque cliente.
+            </p>
+        </field>
+    </record>
+
+    <!-- construction.project_type action window -->
+    <record id="project_type_list_action" model="ir.actions.act_window">
+        <field name="name">Tipos de proyectos</field>
+        <field name="res_model">construction.project_type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear nuevo tipo de proyecto.
+            </p>
+        </field>
+    </record>
+
+    <!-- construction.contract action window -->
+    <record id="contract_type_list_action" model="ir.actions.act_window">
+        <field name="name">Tipos de contratos</field>
+        <field name="res_model">construction.contract_type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear nuevo tipo de contrato.
+            </p>
+        </field>
+    </record>
+
+    <!-- construction.indirect_cost action window -->
+    <record id="indirect_cost_list_action" model="ir.actions.act_window">
+        <field name="name">Costos indirectos</field>
+        <field name="res_model">construction.indirect_cost</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear nuevo costo indirecto.
+            </p>
+        </field>
+    </record>
+
+    <!-- menu catalogos -->
+    <menuitem id="main_catalogs_menu" name="Catalogos" parent="main_construction_menu"/>
+    <!-- ITEMS -->
+    <menuitem id="item_menu_units" name="Unidades" parent="main_catalogs_menu" action="unit_list_action"/>
+    <menuitem id="item_menu_client_approach_type" name="Tipos de enfoques de clientes" parent="main_catalogs_menu" action="client_approach_type_list_action"/>
+    <menuitem id="item_menu_project_type" name="Tipos de proyectos" parent="main_catalogs_menu" action="project_type_list_action"/>
+    <menuitem id="item_menu_contract_type" name="Tipos de contratos" parent="main_catalogs_menu" action="contract_type_list_action"/>
+    <menuitem id="item_menu_indirect_cost" name="Costos indirectos" parent="main_catalogs_menu" action="indirect_cost_list_action"/>
+
+</odoo>

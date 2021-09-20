@@ -1,0 +1,72 @@
+.tree-construction-widget{
+    margin: 0px;
+    padding: 0px;
+ }
+
+ .container-pu{
+  padding: 10px;
+ }
+
+ .container-tree{
+   padding: 10px;
+   border-right: solid 1px lightgrey;
+ }
+
+ .container-table{
+  padding: 10px;
+ }
+
+ ul, #myUL {
+    list-style-type: none;
+  }
+  
+  #myUL {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .caret {
+    cursor: pointer;
+    user-select: none; 
+  }
+  
+  .caret::before {
+    content: "\25B6";
+    color: #00A09D;
+    display: inline-block;
+    margin-right: 6px;
+  }
+  
+  .caret-down::before {
+    transform: rotate(90deg);
+  }
+  
+  .nested {
+    display: none;
+  }
+  
+  .active {
+    display: block;
+  } 
+
+  .container-item-tree{  
+    border-radius: 5px;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.521);
+  }
+
+  .item-tree{
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .item-tree:hover{
+    background-color: gainsboro;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+
+  .tree-ul{
+    border-left: solid 1px #8F8F8F;
+    border-bottom: solid 1px #8F8F8F;
+  }
